@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8" />
+  <title>HiTechMusic App</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    body {
+      margin: 0;
+      font-family: Inter, Arial, sans-serif;
+      background: radial-gradient(circle at top, #15151f, #09090d);
+      color: #ffffff;
+      overflow-x: hidden;
+    }
+    header {
+      position: relative;
+      background: linear-gradient(135deg, #ff424d, #ff8a00);
+      padding: 70px 20px 90px;
+      text-align: center;
+      overflow: hidden;
+    }
+    header::before {
+      content: "♪ ♫ ♩ ♬";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) rotate(-15deg);
+      font-size: 180px;
+      color: rgba(255,255,255,0.08);
+      letter-spacing: 40px;
+      white-space: nowrap;
+      pointer-events: none;
+    }
+    header h1 {
+      font-size: 2.5rem;
+      margin: 0;
+    }
+    header p {
+      max-width: 600px;
+      margin: 15px auto 0;
+      opacity: 0.9;
+    }
+    .container {
+      max-width: 1100px;
+      margin: auto;
+      padding: 40px 20px;
+    }
+    .section-title {
+      font-size: 1.8rem;
+      margin-bottom: 20px;
+    }
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+    }
+    .card {
+      background: #1a1a22;
+      border-radius: 16px;
+      padding: 25px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+    }
+    .card h3 {
+      margin-top: 0;
+    }
+    .price {
+      font-size: 2rem;
+      font-weight: bold;
+      margin: 15px 0;
+      color: #ff8a00;
+    }
+    .card ul {
+      list-style: none;
+      padding: 0;
+    }
+    .card ul li {
+      margin-bottom: 10px;
+      opacity: 0.9;
+    }
+    .btn {
+      display: inline-block;
+      margin-top: 15px;
+      padding: 14px 22px;
+      background: linear-gradient(135deg, #ff424d, #ff8a00);
+      border-radius: 14px;
+      text-decoration: none;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+    }
+    .btn:hover {
+      transform: translateY(-3px) scale(1.05);
+      box-shadow: 0 20px 45px rgba(255,138,0,0.5);
+    }
+    .btn:hover {
+      background: #ff6b73;
+      transform: scale(1.03);
+    }
+    .teachers {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+    }
+    .teacher {
+      background: #1a1a22;
+      border-radius: 16px;
+      padding: 20px;
+      text-align: center;
+    }
+    .avatar {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: #333;
+      margin: 0 auto 15px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+    }
+    footer {
+      background: #0b0b10;
+      text-align: center;
+      padding: 30px 20px;
+      opacity: 0.7;
+    }
+  
+    .download-box {
+      background: linear-gradient(145deg, #1f1f2a, #14141c);
+      padding: 35px 45px;
+      border-radius: 24px;
+      text-align: center;
+      box-shadow: 0 25px 60px rgba(0,0,0,0.6);
+      animation: pulseGlow 3s infinite;
+    }
+    .download-btn {
+      margin-top: 20px;
+      padding: 16px 30px;
+      font-size: 1.1rem;
+      background: linear-gradient(135deg, #00ffb3, #00cfff);
+      color: #000;
+      border-radius: 18px;
+      cursor: pointer;
+      font-weight: bold;
+      box-shadow: 0 0 30px rgba(0,255,200,0.6);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .download-btn:hover {
+      transform: scale(1.08);
+      box-shadow: 0 0 60px rgba(0,255,200,0.9);
+    }
+    @keyframes pulseGlow {
+      0% { box-shadow: 0 0 30px rgba(0,255,200,0.3); }
+      50% { box-shadow: 0 0 60px rgba(0,255,200,0.7); }
+      100% { box-shadow: 0 0 30px rgba(0,255,200,0.3); }
+    }
+    @keyframes float {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+      100% { transform: translateY(0px); }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <img src="icon.png" alt="HiTechMusic Logo" style="width:180px;margin-bottom:25px;filter:drop-shadow(0 0 25px rgba(0,255,180,0.6));animation:float 4s ease-in-out infinite;" />
+  <div style="display:flex;justify-content:center;align-items:center;gap:20px;flex-wrap:wrap;">
+  <h1 style="margin:0;">HiTechMusic App</h1>
+  <div class="btn" onclick="openLogin()" style="font-size:1rem;">Login</div>
+</div>
+  <p>Descoperă toate stilurile de muzică din lume, învățate direct de la profesori autentici din fiecare cultură.</p>
+</header>
+
+<div class="container">
+
+  <section>
+    <h2 class="section-title">De ce HiTechMusic?</h2>
+    <div class="cards">
+      <div class="card">
+        <h3>🌍 Muzică globală</h3>
+        <p>De la jazz și muzică clasică, până la tradiții africane, asiatice sau latino.</p>
+      </div>
+      <div class="card">
+        <h3>🎓 Profesori reali</h3>
+        <p>Artiști și profesori din întreaga lume, conectați direct cu tine.</p>
+      </div>
+      <div class="card">
+        <h3>🚀 Tehnologie modernă</h3>
+        <p>Platformă Hi-Tech cu lecții video, live sessions și feedback personalizat.</p>
+      </div>
+    </div>
+  </section>
+
+  <section style="margin-top: 60px;">
+    <h2 class="section-title">Abonamente (stil Patreon)</h2>
+    <div class="cards">
+      <div class="card">
+        <h3>Listener</h3>
+        <div class="price">€5 / lună</div>
+        <ul>
+          <li>✔ Acces la lecții introductive</li>
+          <li>✔ Stiluri muzicale din toată lumea</li>
+          <li>✔ Comunitate globală</li>
+        </ul>
+        <div class="btn" onclick="alert('Ai ales Listener')">Susține</div>
+      </div>
+      <div class="card">
+        <h3>Musician</h3>
+        <div class="price">€15 / lună</div>
+        <ul>
+          <li>✔ Lecții complete</li>
+          <li>✔ Acces la profesori</li>
+          <li>✔ Workshop-uri live</li>
+        </ul>
+        <div class="btn" onclick="alert('Ai ales Musician')">Devino membru</div>
+      </div>
+      <div class="card">
+        <h3>Master</h3>
+        <div class="price">€30 / lună</div>
+        <ul>
+          <li>✔ Mentorat 1-la-1</li>
+          <li>✔ Feedback personalizat</li>
+          <li>✔ Acces exclusiv</li>
+        </ul>
+        <div class="btn" onclick="alert('Ai ales Master')">Intră în elită</div>
+      </div>
+    </div>
+  </section>
+
+  <section style="margin-top: 60px;">
+    <h2 class="section-title">Profesori din lume</h2>
+    <div class="teachers">
+      <div class="teacher">
+        <div class="avatar">🎷</div>
+        <h4>Jazz – SUA</h4>
+        <p>Saxofon & improvizație</p>
+      </div>
+      <div class="teacher">
+        <div class="avatar">🪕</div>
+        <h4>Tradițional – India</h4>
+        <p>Raga & ritmuri clasice</p>
+      </div>
+      <div class="teacher">
+        <div class="avatar">🎸</div>
+        <h4>Flamenco – Spania</h4>
+        <p>Chitară & expresie</p>
+      </div>
+      <div class="teacher">
+        <div class="avatar">🥁</div>
+        <h4>Africa</h4>
+        <p>Percuție & groove</p>
+      </div>
+    </div>
+  </section>
+
+  <section style="margin-top:70px;">
+    <h2 class="section-title">Descarcă aplicația</h2>
+    <div style="display:flex;justify-content:center;">
+      <div class="download-box">
+        <h3>📱 HiTechMusic App</h3>
+        <p>Disponibil pentru Android & iOS</p>
+        <div class="download-btn" onclick="alert('Download demo')">Download</div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<footer>
+  <p>© 2025 HiTechMusic App • Learn music. Connect cultures.</p>
+</footer>
+
+
+<!-- LOGIN MODAL -->
+<div id="loginModal" class="modal">
+  <div class="modal-content">
+    <img src="icon.png" class="dance-logo" />
+    <h2>Alege tipul de cont</h2>
+    <div class="choice-btn" onclick="showCreator()">🎨 Creator de conținut</div>
+    <div class="choice-btn" onclick="showUser()">🎧 User</div>
+
+    <div id="creatorOptions" class="hidden">
+      <h3>Creator de conținut</h3>
+      <div class="choice-btn">🎤 Artist</div>
+      <div class="choice-btn">🎓 Profesor</div>
+    </div>
+
+    <div id="userOptions" class="hidden">
+      <h3>Utilizator</h3>
+      <p>Ai sub 14 ani?</p>
+      <div class="choice-btn" onclick="showKids()">Da</div>
+      <div class="choice-btn" onclick="showAdult()">Nu</div>
+    </div>
+
+    <div id="kidsOptions" class="hidden">
+      <h3>Cont copii</h3>
+      <p>Încarcă poză CI pentru verificare</p>
+      <input type="file" />
+      <div class="choice-btn">Cont Copil</div>
+    </div>
+
+    <div id="adultOptions" class="hidden">
+      <h3>Alege tipul de cont</h3>
+      <div class="choice-btn">🎓 Student</div>
+      <div class="choice-btn">📘 Elev</div>
+      <div class="choice-btn">👤 Utilizator normal</div>
+    </div>
+
+    <div class="close-btn" onclick="closeLogin()">✖</div>
+  </div>
+</div>
+
+<style>
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.8);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+.modal-content {
+  background: linear-gradient(145deg, #1c1c28, #101018);
+  padding: 35px;
+  border-radius: 30px;
+  width: 90%;
+  max-width: 420px;
+  text-align: center;
+  animation: zoomIn 0.5s ease;
+  position: relative;
+}
+.choice-btn {
+  margin: 12px 0;
+  padding: 14px;
+  border-radius: 16px;
+  background: linear-gradient(135deg,#ff8a00,#ff424d);
+  cursor: pointer;
+  font-weight: bold;
+  animation: pulse 2s infinite;
+}
+.choice-btn:hover { transform: scale(1.05); }
+.hidden { display: none; }
+.close-btn {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  cursor: pointer;
+}
+.dance-logo {
+  width: 90px;
+  margin-bottom: 20px;
+  position: relative;
+  animation: salsaBody 1.2s infinite ease-in-out;
+}
+
+.dance-logo::before,
+.dance-logo::after {
+  content: '';
+  position: absolute;
+  width: 6px;
+  height: 45px;
+  background: white;
+  top: 85px;
+  left: 50%;
+  transform-origin: top;
+}
+
+.dance-logo::before {
+  transform: translateX(-20px) rotate(20deg);
+  animation: legLeft 1.2s infinite ease-in-out;
+}
+
+.dance-logo::after {
+  transform: translateX(20px) rotate(-20deg);
+  animation: legRight 1.2s infinite ease-in-out;
+}
+
+.dance-arms {
+  position: absolute;
+  top: 55px;
+  left: 50%;
+  width: 0;
+  height: 0;
+}
+
+.dance-arms span {
+  position: absolute;
+  width: 45px;
+  height: 5px;
+  background: white;
+  top: 0;
+  transform-origin: left center;
+}
+
+.dance-arms .left {
+  left: -45px;
+  animation: armLeft 1.2s infinite ease-in-out;
+}
+
+.dance-arms .right {
+  left: 0;
+  animation: armRight 1.2s infinite ease-in-out;
+}
+
+@keyframes salsaBody {
+  0% { transform: rotate(0deg) translateX(0); }
+  25% { transform: rotate(4deg) translateX(6px); }
+  50% { transform: rotate(0deg) translateX(0); }
+  75% { transform: rotate(-4deg) translateX(-6px); }
+}
+
+@keyframes armLeft {
+  0% { transform: rotate(20deg); }
+  50% { transform: rotate(-30deg); }
+  100% { transform: rotate(20deg); }
+}
+
+@keyframes armRight {
+  0% { transform: rotate(-20deg); }
+  50% { transform: rotate(30deg); }
+  100% { transform: rotate(-20deg); }
+}
+
+@keyframes legLeft {
+  0% { transform: translateX(-20px) rotate(25deg); }
+  50% { transform: translateX(-20px) rotate(-10deg); }
+  100% { transform: translateX(-20px) rotate(25deg); }
+}
+
+@keyframes legRight {
+  0% { transform: translateX(20px) rotate(-25deg); }
+  50% { transform: translateX(20px) rotate(10deg); }
+  100% { transform: translateX(20px) rotate(-25deg); }
+}
+@keyframes salsa {
+  0% { transform: rotate(0deg) translateX(0); }
+  25% { transform: rotate(5deg) translateX(5px); }
+  50% { transform: rotate(0deg) translateX(0); }
+  75% { transform: rotate(-5deg) translateX(-5px); }
+}
+@keyframes zoomIn {
+  from { transform: scale(0.5); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+@keyframes pulse {
+  0% { box-shadow: 0 0 10px rgba(255,138,0,0.4); }
+  50% { box-shadow: 0 0 25px rgba(255,138,0,0.9); }
+  100% { box-shadow: 0 0 10px rgba(255,138,0,0.4); }
+}
+</style>
+
+<script>
+function openLogin() {
+  document.getElementById('loginModal').style.display = 'flex';
+}
+function closeLogin() {
+  document.getElementById('loginModal').style.display = 'none';
+}
+function showCreator() {
+  hideAll(); document.getElementById('creatorOptions').classList.remove('hidden');
+}
+function showUser() {
+  hideAll(); document.getElementById('userOptions').classList.remove('hidden');
+}
+function showKids() {
+  hideAll(); document.getElementById('kidsOptions').classList.remove('hidden');
+}
+function showAdult() {
+  hideAll(); document.getElementById('adultOptions').classList.remove('hidden');
+}
+function hideAll() {
+  ['creatorOptions','userOptions','kidsOptions','adultOptions'].forEach(id=>{
+    document.getElementById(id).classList.add('hidden');
+  });
+}
+</script>
+
+</body>
+</html>
